@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.artgallery.helper.SquareLayout
+<com.example.artgallery.presentation.helper.SquareLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
         android:layout_width="match_parent"
@@ -14,4 +14,4 @@
             android:scaleType="centerCrop"
             android:background="@color/softGray"/>
 
-</com.example.artgallery.helper.SquareLayout>
+</com.example.artgallery.presentation.helper.SquareLayout>

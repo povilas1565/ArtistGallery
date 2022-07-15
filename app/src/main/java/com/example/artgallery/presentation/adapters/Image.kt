@@ -1,4 +1,4 @@
-package com.example.artgallery.adapters
+package com.example.artgallery.presentation.adapters
 
 data class Image (
     val imageUrl: String,
