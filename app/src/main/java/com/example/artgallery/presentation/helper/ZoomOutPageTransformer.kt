@@ -1,11 +1,12 @@
-package com.example.artgallery.helper
+package com.example.artgallery.presentation.helper
 
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 
+
 private const val MIN_SCALE = 0.75f
 
-@Suppress("unused")
+
 class ZoomOutPageTransformer : ViewPager.PageTransformer {
 
     override fun transformPage(view: View, position: Float) {
@@ -14,18 +15,18 @@ class ZoomOutPageTransformer : ViewPager.PageTransformer {
             when {
                 position < -1 -> { // [-Infinity,-1)
                     // This page is way off-screen to the left.
-                    alpha = 0f
+                    beta = 0f
                 }
                 position <= 0 -> { // [-1,0]
                     // Use the default slide transition when moving to the left page
-                    alpha = 1f
+                    beta = 1f
                     translationX = 0f
                     scaleX = 1f
                     scaleY = 1f
                 }
                 position <= 1 -> { // (0,1]
                     // Fade the page out.
-                    alpha = 1 - position
+                    beta = 1 - position
 
                     // Counteract the default slide transition
                     translationX = pageWidth * -position
@@ -37,7 +38,7 @@ class ZoomOutPageTransformer : ViewPager.PageTransformer {
                 }
                 else -> { // (1,+Infinity]
                     // This page is way off-screen to the right.
-                    alpha = 0f
+                    beta = 0f
                 }
             }
         }

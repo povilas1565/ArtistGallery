@@ -1,4 +1,4 @@
-package com.example.artgallery.adapters
+package com.example.artgallery.presentation.adapters
 
 interface GalleryImageClickListener {
 

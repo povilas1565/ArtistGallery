@@ -1,4 +1,4 @@
-package com.example.artgallery.fragments
+package com.example.artgallery.presentation.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -11,10 +11,11 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.artgallery.R
-import com.example.artgallery.adapters.Image
+import com.example.artgallery.presentation.adapters.Image
 import com.example.artgallery.helper.GlideApp
-import com.example.artgallery.helper.ZoomOutPageTransformer
+import com.example.artgallery.presentation.helper.ZoomOutPageTransformer
 import kotlinx.android.synthetic.main.image_fullscreen.view.*
+import java.util.*
 
 
 @Suppress("unused", "DEPRECATION", "UNCHECKED_CAST", "MemberVisibilityCanBePrivate", "ReplaceGetOrSet",
