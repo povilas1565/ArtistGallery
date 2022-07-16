@@ -1,21 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".presentation.fragment.AuthFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".presentation.fragment.AuthFragment">
 
-    <!-- TODO: Update auth fragment layout -->
     <TextView
+        android:id="@+id/auth_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginSart="17dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/auth_title_text"
+        android:textAppearance="@style.Text.Semibold.24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_til"
+        style="@style/DefaultTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="45dp"
+        android:hint="@string/auth_login_text"
+        app:layout_constraintTop_toBottomOf="@id/auth_title_tv">
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_edt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Вход"/>
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@id/password_edt"
+            android:singleLine="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_til"
+            style="@style/DefaultTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:hint="@string/auth_password_text"
+            app:endIconMode="password_toggle"
+            app:layout_constraintTop_toBottomOf="@id/login_til"
+            app:passwordToggleDrawable="@drawable/ic_password_selector">
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
     <Button
             android:id="@+id/next_screen_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:text="Click"/>
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
