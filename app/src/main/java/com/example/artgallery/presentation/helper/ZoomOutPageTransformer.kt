@@ -3,7 +3,6 @@ package com.example.artgallery.presentation.helper
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 
-
 private const val MIN_SCALE = 0.75f
 
 

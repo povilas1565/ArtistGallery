@@ -5,17 +5,16 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@Suppress("unused")
 @HiltViewModel
 class AuthViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val mutableLoginError = MutableLiveData<LoginError>()
-    private val mutablePasswordError = MutableLiveData<PasswordError>()
+    val mutableLoginError = MutableLiveData<LoginError>()
+    val mutablePasswordError = MutableLiveData<PasswordError>()
     private
 
-    fun isFieldsValid(password: String, login: String): Boolean {
+    fun isFieldsValid(login: String, password: String): Boolean {
         val isLoginValid = when {
             login.isEmpty() -> {
                 mutableLoginError.value = LoginError.EMPTY

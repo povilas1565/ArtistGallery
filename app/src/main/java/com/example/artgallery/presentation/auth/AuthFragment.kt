@@ -24,6 +24,9 @@ class AuthFragment : Fragment() {
 
     private val viewModel by viewModels<AuthViewModel>()
 
+    private var login = ""
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +39,7 @@ class AuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initLoginMask()
         observeLoginError()
+        observePasswordError()
 
         binding.authBtn.setOnClickListener {
             // findNavController().navigate(R.id.action_authFragment_to_mainFragment)
@@ -46,6 +50,7 @@ class AuthFragment : Fragment() {
             //     resources.getString(R.string.auth_error_text),
             //    Snackbar.LENGTH_LONG
             // ).setAnchorView(binding.authBtn).show()
+            viewModel.isFieldsValid(login,binding.passwordEdt.text.toString())
         }
     }
 
@@ -56,6 +61,7 @@ class AuthFragment : Fragment() {
             object : MaskedTextChangedListener.ValueListener {
                 override fun onTextChanged(maskFilled: Boolean, extractedValue: String, formattedValue: String) {
                  {
+                     login = extractedValue
                     //viewModel.setLogin(extractedValue)
                 }
                 }
@@ -81,6 +87,26 @@ class AuthFragment : Fragment() {
             }
         }
     }
+
+    private fun observePasswordError() {
+        viewModel.mutableLoginError.observe(viewLifecycleOwner) { passwordError ->
+            when (passwordError) {
+                passwordError.EMPTY -> {
+                    binding.passwordTil.error = getString(R.string.password_empty_error)
+                }
+                passwordError.NOT_VALID -> {
+                    binding.passwordTil.error = getString(R.string.password_not_valid_error)
+                }
+                passwordError.VALID -> {
+                    binding.passwordTil.error = null
+                }
+                else -> {
+                    // do nothing
+                }
+            }
+        }
+    }
+
     companion object {
         const val PHONE_MASK = "+7 ([000]) [000] [00] [00]"
     }

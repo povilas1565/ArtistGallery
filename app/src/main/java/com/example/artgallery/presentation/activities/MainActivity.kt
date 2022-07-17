@@ -10,10 +10,10 @@ import com.example.artgallery.R
 import com.example.artgallery.presentation.adapters.GalleryImageClickListener
 import com.example.artgallery.presentation.adapters.Image
 import com.example.artgallery.presentation.fragment.GalleryFullscreenFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.recyclerview.*
 import java.util.*
-
 
 class MainActivity : AppCompatActivity(), GalleryImageClickListener {
 
