@@ -27,6 +27,10 @@
         <item name="fontFamily">@font/montserrat_medium</item>
     </style>
 
+    <style name="Text.Medium.14">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="Text.Medium.16">
         <item name="android:textSize">16sp</item>
     </style>

@@ -59,8 +59,18 @@
 
 </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:src="@drawable/ic_surf_edu_background"
+            app:layout_constraintBottom_toTopOf="@+id/auth_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+
     <com.example.artgallery.presentation.common.LoaderButton
-            android:id="@+id/auth_Btn"
+            android:id="@+id/auth_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

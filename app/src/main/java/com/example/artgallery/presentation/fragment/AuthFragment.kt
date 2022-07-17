@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.artgallery.R
 import com.example.artgallery.databinding.FragmentAuthBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  *
@@ -28,7 +29,13 @@ class AuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.authBtn.setOnClickListener {
            // findNavController().navigate(R.id.action_authFragment_to_mainFragment)
-            binding.authBtn.isLoading = true
+           //binding.authBtn.isLoading = true
+
+            Snackbar.make(
+                binding.root,
+                resources.getString(R.string.auth_error_text),
+                Snackbar.LENGTH_LONG
+            ).setAnchorView(binding.authBtn).show()
         }
     }
 }

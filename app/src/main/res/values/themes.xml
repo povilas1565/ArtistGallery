@@ -17,5 +17,8 @@
         <item name="android:navigationBarColor">@color/white</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@color/transparent</item>
+
+        <item name="snackbarStyle">@style/MaterialSnackBarTheme</item>
+        <item name="snackbarTextViewStyle">@style/MaterialSnackBarTextViewTheme</item>
     </style>
 </resources>
