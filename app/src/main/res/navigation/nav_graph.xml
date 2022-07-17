@@ -28,7 +28,7 @@
 
     <fragment
                android:id="@+id/authFragment"
-              android:name="com.example.artgallery.presentation.fragment.AuthFragment"
+              android:name="com.example.artgallery.presentation.auth.AuthFragment"
               android:label="fragment_auth"
               tools:layout="@layout/fragment_auth">
         <action
