@@ -26,8 +26,9 @@ class AuthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.nextScreenBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_authFragment_to_mainFragment)
+        binding.authBtn.setOnClickListener {
+           // findNavController().navigate(R.id.action_authFragment_to_mainFragment)
+            binding.authBtn.isLoading = true
         }
     }
 }

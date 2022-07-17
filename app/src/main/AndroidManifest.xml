@@ -9,6 +9,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.ArtGallery">
+
         <activity
                 android:name=".presentation.activities.MainActivity"
                 android:exported="true"

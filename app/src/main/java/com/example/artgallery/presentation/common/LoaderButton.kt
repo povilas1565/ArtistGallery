@@ -1,3 +1,4 @@
+
 package com.example.artgallery.presentation.common
 
 import android.content.Context
@@ -5,10 +6,14 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.isVisible
 import com.example.artgallery.R
+import com.example.artgallery.databinding.LoaderButtonViewBinding
+
+annotation class JvmOverloads
 
 class LoaderButton @JvmOverloads constructor(
-    context:Context,
+    context: Context,
     attributeSet: AttributeSet? = null
 ) : FrameLayout(
     context,
@@ -16,7 +21,7 @@ class LoaderButton @JvmOverloads constructor(
 ) {
 
     private val binding =
-        LoaderButtonViewBinding.inflats(LayoutInflater.from(context), this)
+        LoaderButtonViewBinding.inflate(LayoutInflater.from(context), this)
     var text: String = ""
         set(value) {
             field = value
@@ -26,7 +31,7 @@ class LoaderButton @JvmOverloads constructor(
     var isLoading: Boolean = false
          set(value) {
              field = value
-             binding.progreesBar.isVisible = value
+             binding.progressBar.isVisible = value
              binding.textTv.isVisible = !value
              binding.root.isEnabled = !value
          }
@@ -39,5 +44,7 @@ class LoaderButton @JvmOverloads constructor(
     }
 
 }
+
+
 
 
