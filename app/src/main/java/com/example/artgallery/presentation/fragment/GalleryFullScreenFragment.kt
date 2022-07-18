@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.artgallery.R
 import com.example.artgallery.presentation.adapters.Image
 import com.example.artgallery.presentation.helper.ZoomOutPageTransformer
+import com.example.artgallery.presentation.helper.GlideApp
 import kotlinx.android.synthetic.main.image_fullscreen.view.*
 import java.util.*
 
