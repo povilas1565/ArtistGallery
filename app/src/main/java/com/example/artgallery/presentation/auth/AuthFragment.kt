@@ -42,15 +42,8 @@ class AuthFragment : Fragment() {
         observePasswordError()
 
         binding.authBtn.setOnClickListener {
-            // findNavController().navigate(R.id.action_authFragment_to_mainFragment)
-            //binding.authBtn.isLoading = true
+            viewModel.auth()
 
-            // Snackbar.make(
-            //    binding.root,
-            //     resources.getString(R.string.auth_error_text),
-            //    Snackbar.LENGTH_LONG
-            // ).setAnchorView(binding.authBtn).show()
-            viewModel.isFieldsValid(login,binding.passwordEdt.text.toString())
         }
     }
 
@@ -60,10 +53,10 @@ class AuthFragment : Fragment() {
             PHONE_MASK,
             object : MaskedTextChangedListener.ValueListener {
                 override fun onTextChanged(maskFilled: Boolean, extractedValue: String, formattedValue: String) {
-                 {
-                     login = extractedValue
-                    //viewModel.setLogin(extractedValue)
-                }
+                    {
+                        login = extractedValue
+                        //viewModel.setLogin(extractedValue)
+                    }
                 }
             }
         )
@@ -111,9 +104,6 @@ class AuthFragment : Fragment() {
         const val PHONE_MASK = "+7 ([000]) [000] [00] [00]"
     }
 }
-
-
-
 
 
 

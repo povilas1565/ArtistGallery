@@ -2,65 +2,61 @@ package com.example.artgallery.presentation.auth
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.artgallery.domain.AuthRepository
+import com.example.artgallery.utils.LoadState
+import com.example.artgallery.utils.Request
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.internal.DoubleCheck.lazy
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     val mutableLoginError = MutableLiveData<LoginError>()
     val mutablePasswordError = MutableLiveData<PasswordError>()
-    private
+    val loadState = MutableLiveData<LoadState>()
 
-    fun isFieldsValid(login: String, password: String): Boolean {
-        val isLoginValid = when {
-            login.isEmpty() -> {
-                mutableLoginError.value = LoginError.EMPTY
-                false
-            }
-            login.length != 10 -> {
-                mutableLoginError.value = LoginError.VALID
-                false
-            }
-            else -> {
-                mutableLoginError.value = LoginError.NOT_VALID
-                true
+    private val inputValidator by lazy {
+        InputValidator(mutableLoginError, mutablePasswordError)
+    }
+
+    private var login: String = ""
+    private var password: String = ""
+
+    fun auth(){
+        if (inputValidator.isFieldValid(login,password)) {
+            viewModelScope.launch(Dispatchers.IO) {
+                authRepository.auth("+7$login", password).collect {requestState ->
+                    when (requestState) {
+
+                        is Request.Loading -> {
+                            loadState.postValue(LoadState.LOADING)
+                        }
+                        is Request.Success -> {
+                            loadState.postValue(LoadState.SUCCESS)
+                        }
+                        is Request.Error -> {
+                            loadState.postValue(LoadState.ERROR)
+
+                        }
+                    }
+                }
             }
         }
-
-        val isPasswordValid = when {
-            password.isEmpty() -> {
-                mutablePasswordError.value = PasswordError.EMPTY
-                false
-            }
-            password.length !in 6..255 -> {
-                mutablePasswordError.value = PasswordError.NOT_VALID
-                false
-            }
-            else -> {
-                mutablePasswordError.value = PasswordError.VALID
-                true
-            }
-        }
-        return isLoginValid && isPasswordValid
     }
 }
 
 
 
-enum class LoginError {
-        EMPTY,
-        NOT_VALID,
-        VALID
-    }
 
-    enum class PasswordError {
-        EMPTY,
-        NOT_VALID,
-        VALID
-    }
+
+
+
+
 
 
 
