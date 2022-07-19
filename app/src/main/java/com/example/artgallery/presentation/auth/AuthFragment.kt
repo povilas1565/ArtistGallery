@@ -21,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 /**
  *
  */
+@Suppress("RedundantNullableReturnType")
 @AndroidEntryPoint
 class AuthFragment : Fragment() {
 

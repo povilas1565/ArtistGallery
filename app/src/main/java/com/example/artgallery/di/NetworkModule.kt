@@ -1,3 +1,4 @@
+
 package com.example.artgallery.di
 
 import dagger.Module
@@ -10,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@Suppress("unused")
 class NetworkModule {
     @Module
     @InstallIn(SingletonComponent::class)
