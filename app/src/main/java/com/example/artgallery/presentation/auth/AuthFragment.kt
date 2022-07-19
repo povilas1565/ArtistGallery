@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.artgallery.R
 import com.example.artgallery.databinding.FragmentAuthBinding
 import com.example.artgallery.presentation.auth.LoginError.*
+import com.example.artgallery.utils.LoadState
+import com.google.android.material.snackbar.Snackbar
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
-import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -24,7 +28,6 @@ class AuthFragment : Fragment() {
 
     private val viewModel by viewModels<AuthViewModel>()
 
-    private var login = ""
 
 
     override fun onCreateView(
@@ -40,23 +43,29 @@ class AuthFragment : Fragment() {
         initLoginMask()
         observeLoginError()
         observePasswordError()
+        observeLoadState()
 
         binding.authBtn.setOnClickListener {
             viewModel.auth()
+        }
 
+        binding.passwordEdt.doOnTextChanged { password, _, _, _ ->
+            viewModel.setPassword(password.toString())
         }
     }
+
 
     private fun initLoginMask() {
         installOn(
             binding.loginEdt,
             PHONE_MASK,
             object : MaskedTextChangedListener.ValueListener {
-                override fun onTextChanged(maskFilled: Boolean, extractedValue: String, formattedValue: String) {
-                    {
-                        login = extractedValue
-                        //viewModel.setLogin(extractedValue)
-                    }
+                override fun onTextChanged(
+                    maskFilled: Boolean,
+                    extractedValue: String,
+                    formattedValue: String
+                ) {
+                    viewModel.setLogin(extractedValue)
                 }
             }
         )
@@ -95,6 +104,35 @@ class AuthFragment : Fragment() {
                 }
                 else -> {
                     // do nothing
+                }
+            }
+        }
+    }
+
+    private fun observeLoadState() {
+        viewModel.loadState.observe(viewLifecycleOwner) { loadState ->
+            when (loadState) {
+                LoadState.LOADING -> {
+                    binding.authBtn.isLoading = true
+                    binding.blockContentContainer.isVisible = true
+                }
+                LoadState.ERROR -> {
+                    binding.authBtn.isLoading = false
+                    binding.blockContentContainer.isVisible = false
+                    Snackbar.make(
+                        binding.root,
+                        "Логин или пароль введен неправильно",
+                        Snackbar.LENGTH_LONG
+                    ).setAnchorView(binding.authBtn).show()
+                }
+                LoadState.SUCCESS -> {
+                    binding.authBtn.isLoading = false
+                    binding.blockContentContainer.isVisible = false
+                    findNavController().navigate(R.id.action_authFragment_to_mainFragment)
+                }
+                else -> {
+                    // Do nothing
+
                 }
             }
         }

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.example.artgallery.presentation.auth
 
 import androidx.lifecycle.MutableLiveData
@@ -48,7 +50,16 @@ class AuthViewModel @Inject constructor(
             }
         }
     }
+
+    fun setLogin(login:String) {
+        this.login = login
+    }
+
+    fun setPassword(password:String) {
+        this.password = password
+    }
 }
+
 
 
 
