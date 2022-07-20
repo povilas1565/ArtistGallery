@@ -1,5 +1,6 @@
 package com.example.artgallery.presentation.fragment
 
+
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,13 +14,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.artgallery.R
 import com.example.artgallery.presentation.adapters.Image
 import com.example.artgallery.presentation.helper.ZoomOutPageTransformer
-import com.example.artgallery.presentation.helper.GlideApp
+import com.example.artgallery.helper.GlideApp
 import kotlinx.android.synthetic.main.image_fullscreen.view.*
 import java.util.*
 
 
-@Suppress("unused", "DEPRECATION", "UNCHECKED_CAST", "MemberVisibilityCanBePrivate", "ReplaceGetOrSet",
-    "RemoveRedundantQualifierName")
+@Suppress("RemoveRedundantQualifierName", "UNCHECKED_CAST", "DEPRECATION", "MemberVisibilityCanBePrivate",
+    "ReplaceGetOrSet")
 class GalleryFullscreenFragment : DialogFragment() {
 
     private var imageList = ArrayList<Image>()
@@ -66,17 +67,24 @@ class GalleryFullscreenFragment : DialogFragment() {
             override fun onPageSelected(position: Int) {
                 // set gallery title
                 tvGalleryTitle.text = imageList.get(position).title
+                // set gallery caption
+                tvGalleryTitle.text = imageList.get(position).caption
             }
 
-            override fun onPageScrolled(arg0: Int, arg1: Float, arg2: Int) {
             }
 
-            override fun onPageScrollStateChanged(arg0: Int) {
-            }
         }
 
+           @Suppress("unused", "UNUSED_PARAMETER")
+           fun onPageScrolled(arg0: Int, arg1: Float, arg2: Int) {
+            }
+
+            @Suppress("unused", "UNUSED_PARAMETER")
+            fun onPageScrollStateChanged(arg0: Int) {
+            }
+
     // gallery adapter
-    inner class GalleryPagerAdapter : PagerAdapter() {
+    class GalleryPagerAdapter : PagerAdapter() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
@@ -109,4 +117,3 @@ class GalleryFullscreenFragment : DialogFragment() {
             container.removeView(obj as View)
         }
     }
-}
